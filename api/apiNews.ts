@@ -1,0 +1,23 @@
+import axios from "axios";
+
+const BASE_URL = import.meta.env.VITE_NEWS_URL;
+const API_TOKEN = import.meta.env.VITE_NEWS_API_KEY;
+
+export const getNews = async () => {
+  if (!BASE_URL || !API_TOKEN) {
+    throw new Error("BASE_URL или API_TOKEN не определены");
+  }
+
+  try {
+    const res = await axios.get(`${BASE_URL}top-headlines`, {
+      params: {
+        country: "us",
+        apiKey: API_TOKEN,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
