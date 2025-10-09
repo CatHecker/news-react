@@ -1,16 +1,19 @@
+import { useTheme } from "../../context/ThemeContext";
 import styles from "./styles.module.css";
 
-type PaginationType = {
-  totalPages: number;
+export type PaginationPropsType = {
+  totalResults: number;
   currentPage: number;
   setCurrentPage: (page: number) => void;
 };
 
 export const Pagination = ({
-  totalPages,
+  totalResults,
   currentPage,
   setCurrentPage,
-}: PaginationType) => {
+}: PaginationPropsType) => {
+  const { isDark } = useTheme();
+  const totalPages = Math.floor(totalResults / 10 + 1);
   const handleNextPage = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
@@ -25,9 +28,10 @@ export const Pagination = ({
 
   const MAX_PAGES_TO_SHOW = 10;
   const isOverflow = totalPages > MAX_PAGES_TO_SHOW + 1;
-
   return (
-    <div className={styles.pagination}>
+    <div
+      className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
+    >
       <button
         onClick={handlePrevPage}
         className={styles.arrow}

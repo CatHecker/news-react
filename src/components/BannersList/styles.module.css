@@ -1,0 +1,14 @@
+.banners {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  padding: 0.5em 1em;
+  gap: 0.5em;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .banners {
+    max-height: 1200px;
+    overflow-y: auto;
+  }
+}

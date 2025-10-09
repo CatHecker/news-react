@@ -1,11 +1,10 @@
+import withSkeleton from "../../helpers/hoc/withSkeleton";
 import type { NewsType } from "../../pages/main/Main";
 import { NewsItem } from "../NewsItem/NewsItem";
 import styles from "./styles.module.css";
 
-
-
-type NewsListType= {
-  news: NewsType[]
+type NewsListType = {
+  news: NewsType[];
 };
 
 export const NewsList = ({ news }: NewsListType) => {
@@ -13,14 +12,18 @@ export const NewsList = ({ news }: NewsListType) => {
     <ul className={styles.list}>
       {news.map((item, ind) => {
         return (
-        <NewsItem      
-          key={ind}     
-          urlToImage={item.urlToImage}
-          title={item.title}
-          publishedAt={item.publishedAt}
-          author={item.author}/>
-            )
+          <NewsItem
+            key={ind}
+            urlToImage={item.urlToImage}
+            title={item.title}
+            publishedAt={item.publishedAt}
+            author={item.author}
+          />
+        );
       })}
     </ul>
   );
 };
+
+const NewsListWithSkeleton = withSkeleton(NewsList, "item", 10, "column");
+export default NewsListWithSkeleton;
